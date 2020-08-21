@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:RGB(230, 230, 230)">
+
+    <div style="margin-top:5%">
+		<div class="col-sm-4"></div>
+		<div class="container col-sm-4">
+		<h2>Student Registration</h2>
+
+		<form method="POST">
+			{% csrf_token %}
+			{% for field in form %}
+				<div class="fieldWrapper">
+					<div class="form-group">
+						<label>{{ field.label_tag }}</label>
+						{{ field }}
+					</div>
+					{% if field.help_text %}
+					<p class="help">{{ field.help_text|safe }}</p>
+					{% endif %}
+				</div>
+				<h6 style="color:red">{{ field.errors }}</h6>
+			{% endfor %}
+			<input type="hidden" name="next" value="{{next}}">
+			<button type="submit" class="btn btn-primary">Register</button>
+		</form>
+
+		</div>
+		<div class="col-sm-4"></div>
+    </div>
+
+</body>
+</html>
+
+
+<!--
+			<div class="form-group">
+			<label for="username">Username:</label>
+			<input class="form-control" id="email" placeholder="Username" name="{{form.username.name}}">
+			</div>
+            <div class="form-group">
+			<label for="firstname">Username:</label>
+			<input class="form-control" id="email" placeholder="First Name" name="{{form.first_name.name}}">
+			</div>
+            <div class="form-group">
+			<label for="lastname">Username:</label>
+			<input class="form-control" id="email" placeholder="Last Name" name="{{form.last_name.name}}">
+			</div>
+			<div class="form-group">
+			<label for="pwd">Password:</label>
+			<input type="password" class="form-control" id="pwd" placeholder="Enter password" name="{{form.password1.name}}">
+			</div>
+            <div class="form-group">
+			<label for="pwd">Password:</label>
+			<input type="password" class="form-control" id="pwd" placeholder="Confirm password" name="{{form.password2.name}}">
+			</div>
+-->

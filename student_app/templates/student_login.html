@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color:RGB(230, 230, 230)">
+
+    <div style="margin-top:150px">
+		<h6 style="text-align: center; color: red;">
+            {% if form.errors %}
+                <p>Your username and password didn't match. Please try again</p>
+            {% elif next %}
+                {% if user.is_authenticated and not user.is_student %}
+                <p>Your account doesn't have access to Student. To proceed,
+                please login with an account that has access.</p>
+                {% endif %}
+            {% endif %}
+        </h6>
+
+		<div class="col-sm-4"></div>
+		<div class="container col-sm-4">
+		<h2>Student Login</h2>
+
+		<form method="POST" action="{% url 'student_app:student_login' %}">
+			{% csrf_token %}
+			{% for field in form %}
+				<div class="fieldWrapper">
+					<div class="form-group">
+						<label>{{ field.label_tag }}</label>
+						{{ field }}
+					</div>
+					{% if field.help_text %}
+					<p class="help">{{ field.help_text|safe }}</p>
+					{% endif %}
+				</div>
+				<h6 style="color:red">{{ field.errors }}</h6>
+			{% endfor %}
+			<input type="hidden" name="next" value="{{next}}">
+			<a href="{% url 'student_app:student_signup' %}">New User? Register here</a><br><br>
+			<button type="submit" class="btn btn-primary">Login</button>
+		</form>
+
+		</div>
+		<div class="col-sm-4"></div>
+    </div>
+
+</body>
+</html>

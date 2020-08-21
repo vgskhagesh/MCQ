@@ -1,0 +1,9 @@
+{% extends 'student_base.html' %}
+
+{% block base_block %}
+{% if user.is_authenticated and user.is_student %}
+    <h1>Welcome : {{user.username}}</h1>
+{% else %}
+    <h1>Login to start test</h1>
+{% endif %}
+{% endblock base_block %}
