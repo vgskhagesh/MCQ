@@ -1,10 +1,22 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import get_user_model
 from django.db import transaction
 from django import forms
 from django.utils.translation import ugettext as _
 
 from student_app.models import User
-from teacher_app.models import Teacher
+from teacher_app.models import Teacher, Paper
+
+class PaperForm(forms.ModelForm):
+    title = forms.CharField(max_length=100,widget=forms.TextInput(attrs={'type':'text','class':'form-control','placeholder':'Paper title','required':'true'}))
+    class Meta:
+        model = Paper
+        fields = ['title',]
+
+    def save(self,request):
+        f = Paper(request.POST)
+        f.save()
+        return f
 
 class TeacherLoginForm(AuthenticationForm):
     username = forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Username'}))
@@ -25,7 +37,7 @@ class TeacherSignupForm(UserCreationForm):
     password2 = forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Confirm Password','type':'password'}))
 
     class Meta(UserCreationForm.Meta):
-        model = User
+        model = get_user_model()
         fields = ['username', 'first_name', 'last_name', 'password1', 'password2']
     
     @transaction.atomic
