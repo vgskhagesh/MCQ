@@ -1,0 +1,11 @@
+{% extends 'teacher_base.html' %}
+{% load bootstrap4 %}
+
+{% block base_block %}
+<h4>Create A New Group</h4>
+  <form method="POST" action="#" id="groupForm">
+  	{% csrf_token %}
+  	{% bootstrap_form form %}
+  	<input type="submit" value="Create" class="btn btn-primary btn-large">
+  </form>
+{% endblock base_block %}

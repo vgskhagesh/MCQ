@@ -5,18 +5,7 @@ from django import forms
 from django.utils.translation import ugettext as _
 
 from student_app.models import User
-from teacher_app.models import Teacher, Paper
-
-class PaperForm(forms.ModelForm):
-    title = forms.CharField(max_length=100,widget=forms.TextInput(attrs={'type':'text','class':'form-control','placeholder':'Paper title','required':'true'}))
-    class Meta:
-        model = Paper
-        fields = ['title',]
-
-    def save(self,request):
-        f = Paper(request.POST)
-        f.save()
-        return f
+from teacher_app.models import Teacher
 
 class TeacherLoginForm(AuthenticationForm):
     username = forms.CharField(max_length=100,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Username'}))

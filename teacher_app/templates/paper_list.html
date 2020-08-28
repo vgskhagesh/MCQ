@@ -1,0 +1,13 @@
+{% extends 'teacher_base.html' %}
+{% load bootstrap4 %}
+
+{% block base_block %}
+    <div class="col-md-4">
+        <h1>@{{user.username}}</h1>
+    </div>
+    <div class="col-md-8">
+    {% for paper in paper_list %}
+        <a href="#">{{paper.name}}</a><br>
+    {% endfor %}
+    </div>
+{% endblock base_block %}

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    'bootstrap4',
     'student_app',
     'teacher_app',
 ]
