@@ -30,7 +30,7 @@ class TeacherHome(TemplateView):
 class CreatePaper(CreateView):
     template_name = 'paper_form.html'
     model = Paper
-    fields = ('name',)
+    fields = ('name','description')
 
     def form_valid(self,form):
         self.object = form.save(commit=False)

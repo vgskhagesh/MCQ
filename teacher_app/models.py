@@ -17,6 +17,7 @@ class Paper(models.Model):
     slug = models.SlugField(allow_unicode=True, unique=True,null=True)
     user = models.ForeignKey(User,related_name="paper",null=True,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)
+    description = models.TextField(blank=True)
 
     class Meta:
         ordering = ['-date']

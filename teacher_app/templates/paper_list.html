@@ -2,12 +2,21 @@
 {% load bootstrap4 %}
 
 {% block base_block %}
-    <div class="col-md-4">
-        <h1>@{{user.username}}</h1>
+    <div style="margin-top:20px">
+    <h1>@<a href="#">{{user.username}}</a> Papers</h1>
+    <ul class="list-group">
+        {% for paper in paper_list %}
+        <li class="card list-group-item">
+        <div class="card-body">
+            <a href="#">{{paper.name}}</a><br>
+            <p style="font-size:10px">Created at: {{paper.date}}</p>
+            {% if paper.description %}
+                <p>{{paper.description}}</p>
+            {% endif %}
+        </div>
+        </li>
+        {% endfor %}
+    </ul>
     </div>
-    <div class="col-md-8">
-    {% for paper in paper_list %}
-        <a href="#">{{paper.name}}</a><br>
-    {% endfor %}
-    </div>
+
 {% endblock base_block %}
