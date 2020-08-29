@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from django.urls import reverse
 from datetime import datetime
 from django.utils.translation import gettext_lazy as _
+import misaka
 
 from student_app.models import User
 
@@ -43,32 +44,36 @@ class Question(models.Model):
     id = models.AutoField(primary_key=True)
     paper = models.ForeignKey(Paper,related_name="question",on_delete=models.CASCADE)
     question = models.TextField(blank=False,default="")
-    choice1 = models.CharField(max_length=100,blank=False,default="")
-    choice2 = models.CharField(max_length=100,blank=False,default="")
-    choice3 = models.CharField(max_length=100,blank=False,default="")
-    choice4 = models.CharField(max_length=100,blank=False,default="")
+    option1 = models.CharField(max_length=100,blank=False,default="")
+    option2 = models.CharField(max_length=100,blank=False,default="")
+    option3 = models.CharField(max_length=100,blank=False,default="")
+    option4 = models.CharField(max_length=100,blank=False,default="")
     date = models.DateTimeField(default=datetime.now())
 
     class AnswerChoices(models.TextChoices):
-        a = 'a'
-        b = 'b'
-        c = 'c'
-        d = 'd'
-    answer = models.CharField(max_length=4,choices=AnswerChoices.choices,default=AnswerChoices.a)
+        A = 'A'
+        B = 'B'
+        C = 'C'
+        D = 'D'
+    key = models.CharField(max_length=4,choices=AnswerChoices.choices,default=AnswerChoices.A)
 
     def is_upperclass(self):
         return self.answer in {
-            self.AnswerChoices.a,
-            self.AnswerChoices.b,
-            self.AnswerChoices.c,
-            self.AnswerChoices.d,
+            self.AnswerChoices.A,
+            self.AnswerChoices.B,
+            self.AnswerChoices.C,
+            self.AnswerChoices.D,
         }
 
     class Meta:
         ordering = ['date']
 
     def __str__(self):
-        return paper.user.username
+        return self.paper.user.username
+
+    def save(self, *args, **kwargs):
+        self.question = misaka.html(self.question)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("teacher_app:question_list", kwargs={"slug": self.paper.slug})

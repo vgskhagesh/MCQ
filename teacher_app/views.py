@@ -62,7 +62,7 @@ class DetailPaper(DetailView):
 @method_decorator(decorators, name='dispatch')
 class QuestionCreate(CreateView):
     model = Question
-    fields = ('question','choice1','choice2','choice3','choice4','answer')
+    fields = ('question','option1','option2','option3','option4','key')
     template_name = "question_form.html"
 
     def form_valid(self,form):

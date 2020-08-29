@@ -1,0 +1,24 @@
+{% extends 'student_base.html' %}
+{% load bootstrap4 %}
+
+{% block base_block %}
+    <div style="margin-top:20px">
+    {% if not paper_list.count %}
+        <div class="card-body text-center">No Papers Created.</div>
+    {% endif %}
+    <ul class="list-group">
+        {% for paper in object_list %}
+        <li class="card list-group-item">
+        <div class="card-body">
+            <a href="#">{{paper.name}}</a><br>
+            <p style="font-size:10px">@<a href="#">{{paper.user.username}}</a>, Created at: {{paper.date}}</p>
+            {% if paper.description %}
+                <p>{{paper.description}}</p>
+            {% endif %}
+        </div>
+        </li>
+        {% endfor %}
+    </ul>
+    </div>
+
+{% endblock base_block %}

@@ -6,16 +6,23 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.views import LoginView
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView, CreateView, ListView, DetailView
 
 from student_app.models import Student, User
+from teacher_app.models import Paper, Question
 from student_app.forms import StudentSignupForm, StudentLoginForm
 from student_app.decorators import student_required
 
+decorators = [login_required(login_url='student_app:student_login'),student_required()]
 # Create your views here.
 
 #@method_decorator([login_required(login_url='student_app:student_login'),student_required(login_url='student_app:student_login',redirect_field_name='student_app:student_home')], name='dispatch')
 class StudentHome(TemplateView):
     template_name = 'student_home.html'
+
+class ListPaper(ListView):
+    model = Paper
+    template_name = "paper_list.html"
 
 class StudentLogin(LoginView):
     template_name = 'student_login.html'

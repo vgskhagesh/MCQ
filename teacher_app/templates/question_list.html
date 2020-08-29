@@ -20,15 +20,15 @@
     <ul class="list-group">
         {% for question in question_list %}
         <li class="card list-group-item">
-        <div class="card-header">{{question.question}}</div>
+        <div class="card-header text-primary">{{question.question|safe}}</div>
         <div class="card-body">
-        <ol type="a">
-            <li>{{question.choice1}}</li>
-            <li>{{question.choice2}}</li>
-            <li>{{question.choice3}}</li>
-            <li>{{question.choice4}}</li>
+        <ol type="A">
+            <li>{{question.option1}}</li>
+            <li>{{question.option2}}</li>
+            <li>{{question.option3}}</li>
+            <li>{{question.option4}}</li>
         </ol>
-        <p class="card-text text-success">Key: {{question.answer}}</p>
+        <p class="card-text text-success">Key: {{question.key}}</p>
         </div>
         </li>
         {% endfor %}
