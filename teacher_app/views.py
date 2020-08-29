@@ -13,13 +13,13 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 #from student_app.models import User
-from teacher_app.models import Teacher, Paper
+from teacher_app.models import Teacher, Paper, Question
 from teacher_app.forms import TeacherSignupForm, TeacherLoginForm
 from teacher_app.decorators import teacher_required
 
-# Create your views here.
-
 decorators = [login_required(login_url='teacher_app:teacher_login'),teacher_required()]
+
+# Create your views here.
 
 @method_decorator(decorators, name='dispatch')
 class TeacherHome(TemplateView):
@@ -58,6 +58,52 @@ class ListPaper(ListView):
 class DetailPaper(DetailView):
     model = Paper
     template_name = "paper_detail.html"
+
+@method_decorator(decorators, name='dispatch')
+class QuestionCreate(CreateView):
+    model = Question
+    fields = ('question','choice1','choice2','choice3','choice4','answer')
+    template_name = "question_form.html"
+
+    def form_valid(self,form):
+        self.object = form.save(commit=False)
+        self.object.paper = Paper.objects.select_related("user").get(slug__iexact=self.kwargs.get("slug"))
+        self.object.save()
+        return super().form_valid(form)
+
+@method_decorator(decorators, name='dispatch')
+class QuestionDetail(DetailView):
+    model = Question
+    template_name = "question_detail.html"
+
+    def get_queryset(self):
+        query_set = super().get_queryset()
+        return query_set.all()
+        
+@method_decorator(decorators, name='dispatch')
+class QuestionList(ListView):
+    model = Question
+    template_name = "question_list.html"
+
+    def get_queryset(self):
+        print(self.kwargs)
+        try:
+            print(Paper.objects.select_related("user").all())
+            self.question_paper = Paper.objects.select_related("user").get(
+                slug__iexact=self.kwargs.get("slug")
+            )
+            self.question_list = Question.objects.filter(paper=self.question_paper)
+            print(self.question_paper)
+        except User.DoesNotExist:
+            raise Http404
+        else:
+            return self.question_paper.question.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["question_paper"] = self.question_paper
+        context["question_list"] = self.question_list
+        return context
 
 class TeacherLogin(LoginView):
     template_name = 'teacher_login.html'

@@ -1,0 +1,42 @@
+{% extends 'teacher_base.html' %}
+{% load bootstrap4 %}
+
+{% block base_block %}
+
+
+
+
+<div class="container" style="margin-bottom:20px">
+    <div class="pb-2 mt-4 mb-2 border-bottom">
+        <h1>
+            {{question_paper.name}} 
+            <small style="font-size:20px">,Questions count: {{question_list.count}}</small> 
+            <a type="button" class="btn btn-sm btn-outline-primary float-right" href="{% url 'teacher_app:question_form' slug=question_paper.slug %}">Add Question</a>
+        </h1>      
+    </div>
+    {% if not question_list.count %}
+        <div class="card-body text-center">No Question create yet. Try creating a question and return to this page.</div>
+    {% endif %}
+    <ul class="list-group">
+        {% for question in question_list %}
+        <li class="card list-group-item">
+        <div class="card-header">{{question.question}}</div>
+        <div class="card-body">
+        <ol type="a">
+            <li>{{question.choice1}}</li>
+            <li>{{question.choice2}}</li>
+            <li>{{question.choice3}}</li>
+            <li>{{question.choice4}}</li>
+        </ol>
+        <p class="card-text text-success">Key: {{question.answer}}</p>
+        </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+
+
+
+
+{% endblock base_block %}

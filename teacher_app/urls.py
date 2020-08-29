@@ -1,7 +1,10 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 
-from teacher_app.views import TeacherHome, TeacherLogin, TeacherSignup, CreatePaper, ListPaper, DetailPaper
+from teacher_app.views import (TeacherHome, TeacherLogin, TeacherSignup, 
+                                CreatePaper, ListPaper, DetailPaper, 
+                                QuestionCreate, QuestionDetail, QuestionList
+                                )
 
 app_name = 'teacher_app'
 
@@ -14,4 +17,8 @@ urlpatterns = [
     path('paper/new/',CreatePaper.as_view(),name="paper_form"),
     path('papers/',ListPaper.as_view(),name="paper_list"),
     path('papers/in/<slug:slug>/',DetailPaper.as_view(),name="paper_detail"),
+
+    path('questions/<slug:slug>/new/',QuestionCreate.as_view(),name="question_form"),
+    path('questions/<slug:slug>/',QuestionList.as_view(),name="question_list"),
+    #path('question/<pk:pk>/',QuestionDetail.as_view(),name="question_detail"),
 ]

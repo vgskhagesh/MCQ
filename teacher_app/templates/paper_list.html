@@ -4,11 +4,15 @@
 {% block base_block %}
     <div style="margin-top:20px">
     <h1>@<a href="#">{{user.username}}</a> Papers</h1>
+    {% if not paper_list.count %}
+        <div class="card-body text-center">No Papers Created Yet.
+        </div>
+    {% endif %}
     <ul class="list-group">
         {% for paper in paper_list %}
         <li class="card list-group-item">
         <div class="card-body">
-            <a href="#">{{paper.name}}</a><br>
+            <a href="{% url 'teacher_app:question_list' slug=paper.slug %}">{{paper.name}}</a><br>
             <p style="font-size:10px">Created at: {{paper.date}}</p>
             {% if paper.description %}
                 <p>{{paper.description}}</p>
