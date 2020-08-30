@@ -1,0 +1,32 @@
+header {
+    position: sticky; 
+    top: 0; 
+    background-color: #009900; 
+    padding:0px 0px 0px 0px; 
+    color:white; 
+    margin: 0 auto; 
+    overflow: hidden; 
+}
+
+.head1 { 
+    font-size:40px; 
+    color:black; 
+    font-weight:bold; 
+    text-align: center;
+} 
+.head2 { 
+    font-size:17px; 
+    margin-left:10px; 
+    margin-bottom:15px; 
+    text-align: center;
+} 
+body { 
+    margin: 0 auto; 
+    background-position:center; 
+    background-size: contain; 
+} 
+
+.body_sec { 
+    margin-left:20px; 
+    text-align: center;
+} 
