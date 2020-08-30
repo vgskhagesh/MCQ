@@ -1,0 +1,32 @@
+{% extends 'teacher_base.html' %}
+{% load bootstrap4 %}
+
+{% block base_block %}
+
+
+
+<div class="container" style="margin-bottom:20px">
+    <div class="pb-2 mt-4 mb-2 border-bottom">
+        <h1 class="text-success">Published Papers</h1>      
+    </div>
+    {% if not paper_list.count %}
+        <div class="card-body text-center">No Papers Created Yet.</div>
+    {% endif %}
+
+    <ul class="list-group">
+        {% for paper in paper_list %}
+        <li class="card list-group-item">
+        <div class="card-body">
+            <a href="{% url 'teacher_app:question_list' slug=paper.slug %}">{{paper.name}}</a><br>
+            <p style="font-size:10px">Created at: {{paper.date}},  <strong>Questions: {{paper.question.count}}</p></strong></p>
+            {% if paper.description %}<p>{{paper.description}}</p>{% endif %}
+        </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+
+
+{% endblock base_block %}

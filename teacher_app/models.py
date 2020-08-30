@@ -23,6 +23,8 @@ class Paper(models.Model):
     #date = models.DateTimeField(auto_now=True)
     date = models.DateTimeField(default=datetime.now())
     description = models.TextField(blank=True)
+    is_published = models.BooleanField(default=False)
+    pub_date = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-date']

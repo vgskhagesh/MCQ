@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import Http404
+from datetime import datetime
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -38,32 +39,17 @@ class CreatePaper(CreateView):
         self.object.save()
         return super().form_valid(form)
 
-
-@method_decorator(decorators, name='dispatch')
-class ListPaper(ListView):
-    model = Paper
-    template_name = "paper_list.html"
-
-    def get_queryset(self):
-        self.paper_user = Paper.objects.filter(user=self.request.user)
-        return self.paper_user
-
-    def get_context_data(self,**kwargs):
-        context = super().get_context_data(**kwargs)
-        context['paper_user'] = self.paper_user
-        return context
-
-
-@method_decorator(decorators, name='dispatch')
-class DetailPaper(DetailView):
-    model = Paper
-    template_name = "paper_detail.html"
-
 @method_decorator(decorators, name='dispatch')
 class QuestionCreate(CreateView):
     model = Question
     fields = ('question','option1','option2','option3','option4','key')
     template_name = "question_form.html"
+
+    def get_initial(self):
+        #print("QuestionCreate:",self.kwargs)
+        if Paper.objects.select_related("user").get(slug__iexact=self.kwargs.get("slug")).is_published:
+            raise Http404
+        return self.initial.copy()
 
     def form_valid(self,form):
         self.object = form.save(commit=False)
@@ -72,14 +58,43 @@ class QuestionCreate(CreateView):
         return super().form_valid(form)
 
 @method_decorator(decorators, name='dispatch')
-class QuestionDetail(DetailView):
-    model = Question
-    template_name = "question_detail.html"
+class PublishedListPaper(ListView):
+    model = Paper
+    template_name = "published_paper_list.html"
 
     def get_queryset(self):
-        query_set = super().get_queryset()
-        return query_set.all()
-        
+        print(self.kwargs)
+        try:
+            self.cache = Paper.objects.select_related("user").get(id__iexact=self.kwargs.get("id"))
+            if not self.cache.is_published:
+                self.cache.is_published = True
+                self.cache.pub_date = datetime.now()
+                self.cache.save()
+            print(cache)
+        except:
+            pass
+        self.paper_user = Paper.objects.filter(user=self.request.user).filter(is_published=True)
+        return self.paper_user
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['paper_user'] = self.paper_user
+        return context
+
+@method_decorator(decorators, name='dispatch')
+class ListPaper(ListView):
+    model = Paper
+    template_name = "paper_list.html"
+
+    def get_queryset(self):
+        self.paper_user = Paper.objects.filter(user=self.request.user).filter(is_published=False)
+        return self.paper_user
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['paper_user'] = self.paper_user
+        return context
+
 @method_decorator(decorators, name='dispatch')
 class QuestionList(ListView):
     model = Question
@@ -104,6 +119,30 @@ class QuestionList(ListView):
         context["question_paper"] = self.question_paper
         context["question_list"] = self.question_list
         return context
+
+@method_decorator(decorators, name='dispatch')
+class DetailPaper(DetailView):
+    model = Paper
+    template_name = "paper_detail.html"
+
+@method_decorator(decorators, name='dispatch')
+class QuestionDetail(DetailView):
+    model = Question
+    template_name = "question_detail.html"
+
+    def get_queryset(self):
+        query_set = super().get_queryset()
+        return query_set.all()
+        
+
+
+
+
+
+
+
+
+
 
 class TeacherLogin(LoginView):
     template_name = 'teacher_login.html'

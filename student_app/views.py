@@ -22,7 +22,7 @@ class StudentHome(TemplateView):
 
 class ListPaper(ListView):
     model = Paper
-    template_name = "paper_list.html"
+    template_name = "paper/paper_list.html"
 
 class StudentLogin(LoginView):
     template_name = 'student_login.html'

@@ -7,12 +7,17 @@
 
 
 <div class="container" style="margin-bottom:20px">
-    <div class="pb-2 mt-4 mb-2 border-bottom">
+    <div class="pb-2 mt-4 mb-2 border-bottom ">
         <h1>
             {{question_paper.name}} 
             <small style="font-size:20px">,Questions count: {{question_list.count}}</small> 
-            <a type="button" class="btn btn-sm btn-outline-primary float-right" href="{% url 'teacher_app:question_form' slug=question_paper.slug %}">Add Question</a>
-        </h1>      
+            {% if not question_paper.is_published %}
+                <a type="button" class="btn btn-sm btn-outline-primary float-right" href="{% url 'teacher_app:question_form' slug=question_paper.slug %}">Add Question</a>
+            {% else %}
+                <small style="font-size:10px" class="text-success float-right">(Paper Published)</small> 
+            {% endif %}
+            
+        </h1>
     </div>
     {% if not question_list.count %}
         <div class="card-body text-center">No Question create yet. Try creating a question and return to this page.</div>

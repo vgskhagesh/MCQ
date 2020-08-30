@@ -3,24 +3,68 @@
 
 {% block base_block %}
     <div style="margin-top:20px">
-    <h1>@<a href="#">{{user.username}}</a> Papers</h1>
+
+    <h1 class="text-danger">Drafted Papers</h1>
     {% if not paper_list.count %}
-        <div class="card-body text-center">No Papers Created Yet.
-        </div>
+        <div class="card-body text-center">No Papers Created Yet.</div>
     {% endif %}
+
+
     <ul class="list-group">
         {% for paper in paper_list %}
         <li class="card list-group-item">
-        <div class="card-body">
-            <a href="{% url 'teacher_app:question_list' slug=paper.slug %}">{{paper.name}}</a><br>
-            <p style="font-size:10px">Created at: {{paper.date}}</p>
+        <div class="card-body row">
+            <div class="container col-sm-10">
+                <a href="{% url 'teacher_app:question_list' slug=paper.slug %}">{{paper.name}}</a><br>
+            <p style="font-size:10px">Created at: {{paper.date}},  <strong>Questions: {{paper.question.count}}</p></strong></p>
             {% if paper.description %}
                 <p>{{paper.description}}</p>
             {% endif %}
+            </div>
+            <div class="container float-right col-sm-2">
+                <a href="#" type="button" class="far fa-trash-alt float-right" style="font-size:20px;color:black;margin-left:20px"></a>
+                {% if paper.question.count %}
+                    <a href="{% url 'teacher_app:published_paper_list_approve' id=paper.id %}" type="button" class="btn btn-success btn-sm py-0 float-right" style="text-align:right">Publish</a>
+                {% else %}
+                    <a href="#" type="button" class="btn btn-success btn-sm py-0 float-right" style="text-align:right" data-toggle="tooltip" data-placement="top" title="Add Questions to Publish">Publish</a>
+                {% endif %}
+            </div>
         </div>
         </li>
         {% endfor %}
     </ul>
+
     </div>
 
+
+
+
+
+
+
+
+    <!-- The Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Alert</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          Cannot create/ edit questions once paper Published
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <a href="https://www.google.com" type="button" class="btn btn-success" data-dismiss="modal">Publish</a>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 {% endblock base_block %}
