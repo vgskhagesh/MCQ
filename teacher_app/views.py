@@ -46,10 +46,13 @@ class QuestionCreate(CreateView):
     template_name = "question_form.html"
 
     def get_initial(self):
-        #print("QuestionCreate:",self.kwargs)
-        if Paper.objects.select_related("user").get(slug__iexact=self.kwargs.get("slug")).is_published:
+        try:
+            if Paper.objects.filter(user=self.request.user).select_related("user").get(slug__iexact=self.kwargs.get("slug")).is_published:
+                raise Http404
+        except:
             raise Http404
-        return self.initial.copy()
+        else:
+            return self.initial.copy()
 
     def form_valid(self,form):
         self.object = form.save(commit=False)
@@ -63,18 +66,20 @@ class PublishedListPaper(ListView):
     template_name = "published_paper_list.html"
 
     def get_queryset(self):
-        print(self.kwargs)
         try:
-            self.cache = Paper.objects.select_related("user").get(id__iexact=self.kwargs.get("id"))
+            self.cache = Paper.objects.select_related("user").filter(user=self.request.user).get(id__iexact=self.kwargs.get("id"))
             if not self.cache.is_published:
                 self.cache.is_published = True
                 self.cache.pub_date = datetime.now()
                 self.cache.save()
-            print(cache)
         except:
             pass
-        self.paper_user = Paper.objects.filter(user=self.request.user).filter(is_published=True)
-        return self.paper_user
+        try:
+            self.paper_user = Paper.objects.filter(user=self.request.user).filter(is_published=True)
+        except:
+            raise Http404
+        else:
+            return self.paper_user
 
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
@@ -101,15 +106,10 @@ class QuestionList(ListView):
     template_name = "question_list.html"
 
     def get_queryset(self):
-        print(self.kwargs)
         try:
-            print(Paper.objects.select_related("user").all())
-            self.question_paper = Paper.objects.select_related("user").get(
-                slug__iexact=self.kwargs.get("slug")
-            )
+            self.question_paper = Paper.objects.filter(user=self.request.user).select_related("user").get(slug__iexact=self.kwargs.get("slug"))
             self.question_list = Question.objects.filter(paper=self.question_paper)
-            print(self.question_paper)
-        except User.DoesNotExist:
+        except:
             raise Http404
         else:
             return self.question_paper.question.all()

@@ -17,7 +17,7 @@ urlpatterns = [
 
     path('paper/new/',CreatePaper.as_view(),name="paper_form"),
     path('papers/',ListPaper.as_view(),name="paper_list"),
-    path('papers/in/<slug:slug>/',DetailPaper.as_view(),name="paper_detail"),
+    #path('papers/in/<slug:slug>/',DetailPaper.as_view(),name="paper_detail"),
 
     path('published/papers/',PublishedListPaper.as_view(),name="published_paper_list"),
     path('published/papers/<int:id>/',PublishedListPaper.as_view(),name="published_paper_list_approve"),

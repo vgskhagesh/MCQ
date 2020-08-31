@@ -12,7 +12,7 @@
             <li class="card list-group-item">
             <div class="card-body">
                 <a href="{% url 'test_app:test_home' pk=paper.id %}">{{paper.name}}</a><br>
-                <p style="font-size:10px">@<a href="#">{{paper.user.username}}</a>, Published Date: {{paper.date}}</p>
+                <p style="font-size:10px">@<a href="#">{{paper.user.username}}</a>, Published Date: {{paper.pub_date}}</p>
                 {% if paper.description %}
                     <p>{{paper.description}}</p>
                 {% endif %}
