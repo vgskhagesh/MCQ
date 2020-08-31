@@ -20,8 +20,7 @@ class Paper(models.Model):
     name = models.CharField(max_length=100,default="")
     slug = models.SlugField(allow_unicode=True, unique=True,null=True)
     user = models.ForeignKey(User,related_name="paper",null=True,on_delete=models.CASCADE)
-    #date = models.DateTimeField(auto_now=True)
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(auto_now=True)
     description = models.TextField(blank=True)
     is_published = models.BooleanField(default=False)
     pub_date = models.DateTimeField(auto_now=True)
@@ -50,7 +49,7 @@ class Question(models.Model):
     option2 = models.CharField(max_length=100,blank=False,default="")
     option3 = models.CharField(max_length=100,blank=False,default="")
     option4 = models.CharField(max_length=100,blank=False,default="")
-    date = models.DateTimeField(default=datetime.now())
+    date = models.DateTimeField(auto_now=True)
 
     class AnswerChoices(models.TextChoices):
         A = 'A'
