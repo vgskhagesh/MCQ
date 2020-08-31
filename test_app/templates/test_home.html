@@ -1,5 +1,6 @@
 {% extends 'test_base.html' %}
 
 {% block base_block %}
-Welcome
+<h1 class="mt-4">Simple Sidebar</h1>
+<a href="{% url 'test_app:test_question' pk=1 %}" type="submit">Start Test</a>
 {% endblock base_block %}

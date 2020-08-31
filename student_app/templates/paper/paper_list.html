@@ -8,15 +8,17 @@
     {% endif %}
     <ul class="list-group">
         {% for paper in object_list %}
-        <li class="card list-group-item">
-        <div class="card-body">
-            <a href="#">{{paper.name}}</a><br>
-            <p style="font-size:10px">@<a href="#">{{paper.user.username}}</a>, Created at: {{paper.date}}</p>
-            {% if paper.description %}
-                <p>{{paper.description}}</p>
-            {% endif %}
-        </div>
-        </li>
+        {% if paper.is_published %}
+            <li class="card list-group-item">
+            <div class="card-body">
+                <a href="{% url 'test_app:test_home' pk=paper.id %}">{{paper.name}}</a><br>
+                <p style="font-size:10px">@<a href="#">{{paper.user.username}}</a>, Published Date: {{paper.date}}</p>
+                {% if paper.description %}
+                    <p>{{paper.description}}</p>
+                {% endif %}
+            </div>
+            </li>
+        {% endif %}
         {% endfor %}
     </ul>
     </div>

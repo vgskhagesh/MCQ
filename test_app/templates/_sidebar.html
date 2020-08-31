@@ -1,0 +1,20 @@
+<div class="bg-light border-right min-vh-100" id="sidebar-wrapper">
+    <div class="sidebar-heading text-success">Question Number </div>
+    <div class="list-group list-group-flush overflow-auto vh-100">
+
+
+    {% for q in sidebar_list %}
+        {% ifequal q.number question_number %}
+            <a href="{% url 'test_app:test_question' pk=q.number %}" class="list-group-item list-group-item-action bg-muted">Q.{{q.number}}  {% if q.is_attempted %}(Answered: {{q.answer}}){% endif %}</a>
+        {% else %}
+            {% if q.is_attempted %}
+                <a href="{% url 'test_app:test_question' pk=q.number %}" class="list-group-item list-group-item-action bg-success text-light">Q.{{q.number}}  (Answered: {{q.answer}})</a>
+            {% else %}  
+                <a href="{% url 'test_app:test_question' pk=q.number %}" class="list-group-item list-group-item-action bg-warning">Q.{{q.number}}</a>
+            {% endif %}
+        {% endifequal %}
+    {% endfor %}
+    <a href="{% url 'test_app:test_end'%}" class="list-group-item list-group-item-action bg-danger text-light">End of Test</a>
+
+    </div>
+</div>

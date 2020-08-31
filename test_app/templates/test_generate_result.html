@@ -1,0 +1,7 @@
+{% extends 'test_base.html' %}
+
+{% block base_block %}
+<h1 class="mt-4">Your Result</h1>
+<h2>Success Rate: {{percentage}}%</h2>
+<a href="{% url 'student_app:student_home' %}" type="submit">Home</a>
+{% endblock base_block %}

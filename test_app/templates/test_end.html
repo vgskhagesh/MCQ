@@ -1,0 +1,14 @@
+{% extends 'test_base.html' %}
+{% load bootstrap4 %}
+
+{% block sidebar %}
+    {% include "_sidebar.html" %}
+{% endblock sidebar %}
+
+
+{% block base_block %}
+    
+    <h1 class="mt-4">End Test</h1>
+    <a href="{% url 'test_app:test_generate_result' %}" class="btn btn-danger" role="button">Generate Result</a>
+            
+{% endblock base_block %}

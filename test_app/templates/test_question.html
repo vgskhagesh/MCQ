@@ -1,0 +1,43 @@
+{% extends 'test_base.html' %}
+{% load bootstrap4 %}
+
+{% block sidebar %}
+    {% include "_sidebar.html" %}
+{% endblock sidebar %}
+
+
+{% block base_block %}
+    <h1 class="mt-4">Question No.: {{question_number}}</h1>
+    <div class="container">
+    <p> {{question.question|safe}} </p>
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-check">
+        <label class="form-check-label" for="radio1">
+            <input type="radio" class="form-check-input" id="radio1" name="{{form.answer.name}}" value="A"> {{question.option1}}
+        </label>
+        </div>
+        <div class="form-check">
+        <label class="form-check-label" for="radio2">
+            <input type="radio" class="form-check-input" id="radio1" name="{{form.answer.name}}" value="B"> {{question.option2}}
+        </label>
+        </div>
+        <div class="form-check">
+        <label class="form-check-label" for="radio1">
+            <input type="radio" class="form-check-input" id="radio1" name="{{form.answer.name}}" value="C"> {{question.option3}}
+        </label>
+        </div>
+        <div class="form-check">
+        <label class="form-check-label" for="radio2">
+            <input type="radio" class="form-check-input" id="radio1" name="{{form.answer.name}}" value="D"> {{question.option4}}
+        </label>
+        </div>
+        <input type="radio" name="{{form.answer.name}}" value="E" style="visibility: hidden" checked>
+
+        <input type="submit" value="Save and Next" class="btn btn-primary btn-block">
+    </form>
+    </div>
+
+            
+{% endblock base_block %}
