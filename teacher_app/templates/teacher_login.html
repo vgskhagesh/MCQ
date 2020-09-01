@@ -1,55 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+{% load static %}
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <title>Teacher Login</title>
+    <title>Teacher Signup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="{% static 'css/signup.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
 </head>
-<body style="background-color:RGB(230, 210, 210)">
+<body>
+	<!-- main -->
+	<div class="main-w3layouts wrapper">
+		<h1>Teacher Login</h1>
 
-    <div style="margin-top:150px">
-		<h6 style="text-align: center; color: red;">
-            {% if form.errors %}
-                <p>Your username and password didn't match. Please try again</p>
-            {% elif next %}
-                {% if user.is_authenticated and not user.is_teacher %}
-                <p>Your account doesn't have access to Teacher. To proceed,
-                please login with an account that has access.</p>
-                {% endif %}
-            {% endif %}
-        </h6>
+        {% if user.is_authenticated and not user.is_teacher%}
+            <p style="text-align:center">If you are a student, login into student portal.</p>
+        {% elif form.errors%}
+            <p style="text-align:center">Please enter a correct username and password. Note that both fields may be case-sensitive.</p>
+        {% endif %}
+            
+        <div class="main-agileinfo">
+            <div class="agileits-top">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <input class="text" type="text" name="{{form.username.name}}" placeholder="Username" required="true">
+                    <input class="text w3lpass" type="password" name="{{form.password.name}}" placeholder="Password" required="">
+                    
+                    <input type="submit" value="LOGIN">
+                </form>
+                <p>Not Registered? <a href="{% url 'teacher_app:teacher_signup' %}"> Create Account!</a></p>
+            </div>
+        </div>
+		
 
-		<div class="col-sm-4"></div>
-		<div class="container col-sm-4">
-		<h2>Teacher Login</h2>
-
-		<form method="POST" action="{% url 'teacher_app:teacher_login' %}">
-			{% csrf_token %}
-			{% for field in form %}
-				<div class="fieldWrapper">
-					<div class="form-group">
-						<label>{{ field.label_tag }}</label>
-						{{ field }}
-					</div>
-					{% if field.help_text %}
-					<p class="help">{{ field.help_text|safe }}</p>
-					{% endif %}
-				</div>
-				<h6 style="color:red">{{ field.errors }}</h6>
-			{% endfor %}
-			<input type="hidden" name="next" value="{{next}}">
-			<a href="{% url 'teacher_app:teacher_signup' %}">New User? Register here</a><br><br>
-			<button type="submit" class="btn btn-primary">Login</button>
-		</form>
-
-		</div>
-		<div class="col-sm-4"></div>
-    </div>
-
+		<ul class="colorlib-bubbles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
 </body>
 </html>
