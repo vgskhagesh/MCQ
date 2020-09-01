@@ -2,12 +2,59 @@
 {% load bootstrap4 %}
 
 {% block base_block %}
-<div style="margin-top:20px" class="container">
-<h4>Create A New Question</h4>
-  <form method="POST" action="#" id="groupForm">
-  	{% csrf_token %}
-  	{% bootstrap_form form layout='horizontal' %}
-  	<input type="submit" value="Create" class="btn btn-primary btn-large btn-block">
-  </form>
-</div>
+	<h4 style="padding:10px">Create new Question</h4>
+    <div class="card rounded" style="">
+		
+		<form method="POST" >
+			{% csrf_token %}
+
+			<div class="card-header bg-light">
+				<div class="form-group">
+					<label for="comment">Question:</label>
+					<textarea class="form-control" rows="5" id="comment" name="{{form.question.name}}"></textarea>
+					<h6 style="color:red;font-size:.7em">{{form.question.errors}}</h6>
+				</div>
+			</div>
+
+			<div class="card-body" style="margin:10px">
+				<div class="form-check form-inline">
+					<label class="form-check-label w-75" for="radio1">
+						<input type="radio" class="form-check-input" id="radio1" name="{{form.key.name}}" value="A"> 
+						<label for="usr" style="margin:10px">  A) </label>
+						<input type="text" class="form-control w-100" id="usr" name="{{form.option1.name}}">
+					</label>
+					<h6 style="color:red;font-size:.7em">{{form.option1.errors}}</h6>
+				</div>
+				<div class="form-check form-inline">
+					<label class="form-check-label w-75" for="radio1">
+						<input type="radio" class="form-check-input" id="radio1" name="{{form.key.name}}" value="B"> 
+						<label for="usr" style="margin:10px">  B) </label>
+						<input type="text" class="form-control w-100" id="usr" name="{{form.option2.name}}">
+					</label>
+					<h6 style="color:red;font-size:.7em">{{form.option2.errors}}</h6>
+				</div>
+				<div class="form-check form-inline">
+					<label class="form-check-label w-75" for="radio1">
+						<input type="radio" class="form-check-input" id="radio1" name="{{form.key.name}}" value="C"> 
+						<label for="usr" style="margin:10px">  C) </label>
+						<input type="text" class="form-control w-100" id="usr" name="{{form.option3.name}}">
+					</label>
+					<h6 style="color:red;font-size:.7em">{{form.option3.errors}}</h6>
+				</div>
+				<div class="form-check form-inline">
+					<label class="form-check-label w-75" for="radio1">
+						<input type="radio" class="form-check-input" id="radio1" name="{{form.key.name}}" value="D"> 
+						<label for="usr" style="margin:10px">  D) </label>
+						<input type="text" class="form-control w-100" id="usr" name="{{form.option4.name}}">
+					</label>
+					<h6 style="color:red;font-size:.7em">{{form.option4.errors}}</h6>
+				</div>
+				{% if form.key.errors %}<h6 style="color:red;font-size:.7em">Please select an answer</h6>{% endif %}
+				
+				<input type="submit" value="Create" class="btn btn-primary btn-block m-50" style="margin-top:20px" name="{{next}}">
+			</div>			
+
+			
+		</form>
+	</div>
 {% endblock base_block %}

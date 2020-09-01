@@ -2,12 +2,15 @@
 {% load bootstrap4 %}
 
 {% block base_block %}
-    <div style="margin-top:20px">
+    <div class="container" style="margin-top:20px">
 
-    <h1 class="text-danger">Drafted Papers</h1>
-    {% if not paper_list.count %}
-        <div class="card-body text-center">No Papers Created Yet.</div>
-    {% endif %}
+    <div class="pb-2 mt-4 mb-2 border-bottom ">
+      <h1 class="text-danger">Drafted Papers</h1>
+      {% if not paper_list.count %}
+          <div class="card-body text-center">No Papers Created Yet.</div>
+      {% endif %}
+    </div>
+    
 
 
     <ul class="list-group">
@@ -22,11 +25,13 @@
             {% endif %}
             </div>
             <div class="container float-right col-sm-2">
-                <a href="#" type="button" class="far fa-trash-alt float-right" style="font-size:20px;color:black;margin-left:20px"></a>
+                <a href="#" type="button" class="far fa-trash-alt float-right" style="font-size:20px;color:black;margin-left:5px"></a>
                 {% if paper.question.count %}
-                    <a href="{% url 'teacher_app:published_paper_list_approve' id=paper.id %}" type="button" class="btn btn-success btn-sm py-0 float-right" style="text-align:right">Publish</a>
+                    <a href="{% url 'teacher_app:published_paper_list_approve' id=paper.id %}" type="button" class="btn btn-success btn-sm float-right" style="margin-left:5px">Publish</a>
+                    <a href="{% url 'teacher_app:question_form' slug=paper.slug %}" class="btn btn-info btn-sm float-right"><i class="fa fa-plus"></i></a>
                 {% else %}
-                    <a href="#" type="button" class="btn btn-success btn-sm py-0 float-right" style="text-align:right" data-toggle="tooltip" data-placement="top" title="Add Questions to Publish">Publish</a>
+                    <a href="#" type="button" class="btn btn-success btn-sm float-right" style="margin-left:5px" data-toggle="tooltip" data-placement="top" title="Add Questions to Publish">Publish</a>
+                    <a href="{% url 'teacher_app:question_form' slug=paper.slug %}" class="btn btn-info btn-sm float-right"><i class="fa fa-plus"></i></a>
                 {% endif %}
             </div>
         </div>
