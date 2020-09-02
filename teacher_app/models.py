@@ -32,7 +32,6 @@ class Paper(models.Model):
         return self.name
 
     def save(self,*args,**kwargs):
-        print("save")
         self.slug = slugify(self.id)
         super().save(*args,**kwargs)
 

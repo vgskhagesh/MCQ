@@ -7,37 +7,56 @@
 
 
 <div class="container" style="margin-bottom:20px">
+
     <div class="pb-2 mt-4 mb-2 border-bottom ">
-        <h1>
-            {{question_paper.name}} 
-            <small style="font-size:20px">,Questions count: {{question_list.count}}</small> 
+        <div class="row">
+        <div class="col-sm-8">
+            <h3>Paper: {{question_paper.name}}</h3>
+            <small>Question count:{{question_list.count}}</small>
+        </div>
+        <div class="col-sm-4">
             {% if not question_paper.is_published %}
-                <a type="button" class="btn btn-sm btn-outline-primary float-right" href="{% url 'teacher_app:question_form' slug=question_paper.slug %}">Add Question</a>
+                <div class="container">
+                    <a href="{% url 'teacher_app:paper_list' id=question_paper.id %}" type="button" class="far fa-trash-alt float-right" style="font-size:20px;color:red;margin-left:5px"></a>
+                    <a href="{% url 'teacher_app:question_form' slug=question_paper.slug %}" class="btn btn-success btn-sm float-right py-0"><i class="fa fa-plus"></i></a>
+                </div>
             {% else %}
                 <small style="font-size:10px" class="text-success float-right">(Paper Published)</small> 
             {% endif %}
-            
-        </h1>
+        </div>
+        </div>
     </div>
+
+
     {% if not question_list.count %}
         <div class="card-body text-center">No Question create yet. Try creating a question and return to this page.</div>
     {% endif %}
+
+
     <ul class="list-group">
         {% for question in question_list %}
         <li class="card list-group-item">
-        <div class="card-header text-primary">{{question.question|safe}}</div>
+        <strong>Question:</strong> 
+        {% if not question_paper.is_published %}
+            <a href="{% url 'teacher_app:question_list' slug=question_paper.slug id=question.id %}" type="button" class="far fa-trash-alt float-right" style="font-size:1em;color:black;margin-left:5px"></a>
+        {% endif %}
+
+        <div class="card-header"><div class="container text-primary">{{question.question|safe}}</div></div>
         <div class="card-body">
-        <ol type="A">
-            <li>{{question.option1}}</li>
-            <li>{{question.option2}}</li>
-            <li>{{question.option3}}</li>
-            <li>{{question.option4}}</li>
-        </ol>
-        <p class="card-text text-success">Key: {{question.key}}</p>
+            <ol type="A">
+                <li>{{question.option1}}</li>
+                <li>{{question.option2}}</li>
+                <li>{{question.option3}}</li>
+                <li>{{question.option4}}</li>
+            </ol>
+            <strong class="card-text text-success">Key: {{question.key}}</strong>
         </div>
+        
         </li>
         {% endfor %}
     </ul>
+
+
 </div>
 
 

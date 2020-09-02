@@ -67,18 +67,18 @@ class PublishedListPaper(ListView):
 
     def get_queryset(self):
         try:
-            self.cache = Paper.objects.select_related("user").filter(user=self.request.user).get(id__iexact=self.kwargs.get("id"))
-            if not self.cache.is_published:
-                self.cache.is_published = True
-                self.cache.pub_date = datetime.now()
-                self.cache.save()
-        except:
-            pass
-        try:
             self.paper_user = Paper.objects.filter(user=self.request.user).filter(is_published=True)
         except:
             raise Http404
         else:
+            try:
+                self.cache = Paper.objects.select_related("user").filter(user=self.request.user).get(id__iexact=self.kwargs.get("id"))
+                if not self.cache.is_published:
+                    self.cache.is_published = True
+                    self.cache.pub_date = datetime.now()
+                    self.cache.save()
+            except:
+                pass
             return self.paper_user
 
     def get_context_data(self,**kwargs):
@@ -92,6 +92,10 @@ class ListPaper(ListView):
     template_name = "paper_list.html"
 
     def get_queryset(self):
+        try:
+            Paper.objects.filter(user=self.request.user).get(id=self.kwargs.get("id")).delete()
+        except :
+            pass
         self.paper_user = Paper.objects.filter(user=self.request.user).filter(is_published=False)
         return self.paper_user
 
@@ -112,6 +116,11 @@ class QuestionList(ListView):
         except:
             raise Http404
         else:
+            try:
+                if not self.question_paper.is_published:
+                    Question.objects.filter(paper_id=self.question_paper.id).get(id=self.kwargs.get("id")).delete()
+            except :
+                pass
             return self.question_paper.question.all()
 
     def get_context_data(self, **kwargs):

@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/master.css' %}" rel="stylesheet">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -11,9 +13,54 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    
     <title>Teacher</title>
 </head>
 <body>
+
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a href="{% url 'teacher_app:teacher_home' %}" class="navbar-brand">
+            <h2>Teacher MCQ</h2>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="{% url 'teacher_app:teacher_home' %}" class="nav-item nav-link active">Home</a>
+                <a href="{% url 'teacher_app:published_paper_list' %}" class="nav-item nav-link">Published Papers</a>
+                <a href="{% url 'teacher_app:paper_list' %}" class="nav-item nav-link">Drafted Papers</a>
+                <a href="{% url 'teacher_app:paper_form' %}" class="nav-item nav-link">Create Paper</a>
+                <a href="#" class="nav-item nav-link disabled" tabindex="-1">Results</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a href="{% url 'home' %}" class="nav-item nav-link">About</a>
+                <a href="{% url 'teacher_app:teacher_logout' %}" class="nav-item nav-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-image: url(&quot;{% static 'images/image3.jpg' %} &quot;);">
     <a class="navbar-brand" href="{% url 'teacher_app:teacher_home' %}">Teacher</a>
     <ul class="navbar-nav ml-auto">
@@ -39,6 +86,7 @@
         
     </ul>
     </nav>
+-->
 
     <div class="container">
     {% block base_block %}

@@ -11,6 +11,46 @@
     <title>Student</title>
 </head>
 <body>
+
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a href="{% url 'student_app:student_home' %}" class="navbar-brand">
+            <h2>Student MCQ</h2>
+        </a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="{% url 'student_app:student_home' %}" class="nav-item nav-link active">Home</a>
+                <a href="{% url 'student_app:paper_list' %}" class="nav-item nav-link">Papers</a>
+                <a href="#" class="nav-item nav-link disabled" tabindex="-1">Results</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a href="{% url 'home' %}" class="nav-item nav-link">About</a>
+                {% if user.is_authenticated and user.is_student%}
+                    <a href="{% url 'student_app:student_logout' %}" class="nav-item nav-link">Logout</a>
+                {% else %}
+                    <a href="{% url 'student_app:student_signup' %}" class="nav-item nav-link">Register</a>
+                    <a href="{% url 'student_app:student_login' %}" class="nav-item nav-link">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-image: url(&quot;{% static 'images/image3.jpg' %} &quot;);">
     <a class="navbar-brand" href="{% url 'student_app:student_home' %}">Student</a>
     <ul class="navbar-nav ml-auto">
@@ -35,6 +75,7 @@
         
     </ul>
     </nav>
+-->
 
     <div class="container">
     {% block base_block %}

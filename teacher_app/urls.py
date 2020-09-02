@@ -17,6 +17,7 @@ urlpatterns = [
 
     path('paper/new/',CreatePaper.as_view(),name="paper_form"),
     path('papers/',ListPaper.as_view(),name="paper_list"),
+    path('papers/delete/<int:id>',ListPaper.as_view(),name="paper_list"),
     #path('papers/in/<slug:slug>/',DetailPaper.as_view(),name="paper_detail"),
 
     path('published/papers/',PublishedListPaper.as_view(),name="published_paper_list"),
@@ -24,5 +25,6 @@ urlpatterns = [
 
     path('questions/<slug:slug>/new/',QuestionCreate.as_view(),name="question_form"),
     path('questions/<slug:slug>/',QuestionList.as_view(),name="question_list"),
+    path('questions/<slug:slug>/delete/<int:id>/',QuestionList.as_view(),name="question_list"),
     #path('question/<pk:pk>/',QuestionDetail.as_view(),name="question_detail"),
 ]
