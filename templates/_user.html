@@ -1,0 +1,17 @@
+
+<div class="container">
+    {% if user_detail.is_student %}
+        Student Details <br>
+        {{user_detail.username}} <br>
+        {{user_detail.first_name}} <br>
+        {{user_detail.last_name}} <br>
+        {{user_detail.email}}
+
+    {% else %}
+        Teacher Details <br>
+        {{user_detail.username}} <br>
+        {{user_detail.first_name}} <br>
+        {{user_detail.last_name}} <br>
+        {{user_detail.email}}
+    {% endif %}
+</div>

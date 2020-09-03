@@ -11,7 +11,7 @@
 </head>
 <body>
 	<!-- main -->
-	<div class="main-w3layouts wrapper">
+	<div class="main-w3layouts wrapper" style="padding-top:1em">
 		<h1>Teacher Signup</h1>
         <div class="main-agileinfo">
             <div class="agileits-top">
@@ -22,7 +22,7 @@
 
                     <div class="extra">
                         <input class="firstname" type="text" name="{{form.first_name.name}}" placeholder="First name" required="">
-                        <input class="lastname" type="text" name="{{form.first_name.name}}" placeholder="Last Name" required="">
+                        <input class="lastname" type="text" name="{{form.last_name.name}}" placeholder="Last Name" required="">
                     </div>
 
                     <input class="text email" type="email" name="{{form.email.name}}" placeholder="Email" required="">
@@ -34,6 +34,7 @@
                     
                     <input type="submit" value="SIGNUP">
                 </form>
+                <p><a href="{% url 'teacher_app:teacher_home' %}"> Home page</a></p>
                 <p>Don't have an Account? <a href="{% url 'teacher_app:teacher_login' %}"> Login Now!</a></p>
             </div>
         </div>

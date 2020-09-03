@@ -110,6 +110,7 @@ class TestGenerateResult(TemplateView):
             context["percentage"] = result/count*100
             self.paper_clone.is_submitted = True
             self.paper_clone.result = result/count*100
+            self.paper_clone.save()
 
             del self.request.session["paper_id"]
             del self.request.session["paper_clone_id"]

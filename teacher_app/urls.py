@@ -4,7 +4,8 @@ from django.contrib.auth import views as auth_views
 from teacher_app.views import (TeacherHome, TeacherLogin, TeacherSignup, 
                                 CreatePaper, ListPaper, DetailPaper, 
                                 QuestionCreate, QuestionDetail, QuestionList,
-                                PublishedListPaper
+                                PublishedListPaper,
+                                ListResult, DetailUSer
                                 )
 
 app_name = 'teacher_app'
@@ -27,4 +28,7 @@ urlpatterns = [
     path('questions/<slug:slug>/',QuestionList.as_view(),name="question_list"),
     path('questions/<slug:slug>/delete/<int:id>/',QuestionList.as_view(),name="question_list"),
     #path('question/<pk:pk>/',QuestionDetail.as_view(),name="question_detail"),
+
+    path('results/',ListResult.as_view(),name="result_list_teacher"),
+    path('user/<int:pk>/',DetailUSer.as_view(),name="user_detail_teacher"),
 ]

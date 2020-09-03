@@ -17,12 +17,12 @@ User = get_user_model()
 from teacher_app.models import Teacher, Paper, Question
 from teacher_app.forms import TeacherSignupForm, TeacherLoginForm
 from teacher_app.decorators import teacher_required
+from test_app.models import PaperClone, QuestionClone
 
 decorators = [login_required(login_url='teacher_app:teacher_login'),teacher_required()]
 
 # Create your views here.
 
-@method_decorator(decorators, name='dispatch')
 class TeacherHome(TemplateView):
     template_name = 'teacher_home.html'
 
@@ -143,6 +143,34 @@ class QuestionDetail(DetailView):
         query_set = super().get_queryset()
         return query_set.all()
         
+
+######################################################################################################
+
+class ListResult(ListView):
+    template_name = "result_list_teacher.html"
+    model = PaperClone
+
+    def get_queryset(self):
+        self.paper_clone = PaperClone.objects.filter(is_submitted=True)
+        return super().get_queryset()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["paper_list"] = self.paper_clone
+        context["teacher"] = True
+        return context
+    
+
+class DetailUSer(DetailView):
+    model = User
+    template_name = "user_detail_teacher.html"
+
+    def get_context_data(self, **kwargs):
+        self.user_detail = User.objects.get(id=self.kwargs.get("pk"))
+        context = super().get_context_data(**kwargs)
+        context["user_detail"] = self.user_detail
+        context["teacher"] = True
+        return context
 
 
 

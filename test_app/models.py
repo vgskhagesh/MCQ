@@ -12,6 +12,10 @@ class PaperClone(models.Model):
     student = models.ForeignKey(User,on_delete=models.CASCADE,related_name="paper_clone_student")
     result = models.IntegerField(default=0)
     is_submitted = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-result']
 
 class QuestionClone(models.Model):
     question = models.ForeignKey(Question,on_delete=models.CASCADE,related_name="question_clone")

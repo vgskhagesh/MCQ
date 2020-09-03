@@ -3,6 +3,7 @@
 
 {% block base_block %}
     <div style="margin-top:20px">
+    <h2>All Papers</h2>
     {% if not paper_list.count %}
         <div class="card-body text-center">No Papers Created.</div>
     {% endif %}
@@ -12,10 +13,11 @@
             <li class="card list-group-item">
             <div class="card-body">
                 <a href="{% url 'test_app:test_home' pk=paper.id %}">{{paper.name}}</a><br>
-                <p style="font-size:10px">@<a href="#">{{paper.user.username}}</a>, Published Date: {{paper.pub_date}}</p>
+                <p style="font-size:10px">@<a href="{% url 'student_app:user_detail_student' pk=paper.user.id %}">{{paper.user.username}}</a>, Published Date: {{paper.pub_date}}</p>
                 {% if paper.description %}
                     <p>{{paper.description}}</p>
                 {% endif %}
+                <p style="font-size:10px"><a href="{% url 'student_app:result_list_student_paper' paper_id=paper.id %}">Standings</a>, <a href="{% url 'test_app:test_home' pk=paper.id %}">Take Test</a></p>
             </div>
             </li>
         {% endif %}

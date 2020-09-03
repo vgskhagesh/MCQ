@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-{% load static %}
+
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/master.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/master.css' %}">
+    <link href="{% static 'css/table.css' %}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,7 +18,7 @@
     
     <title>Teacher</title>
 </head>
-<body>
+<body class="teacherbody">
 
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -33,11 +35,15 @@
                 <a href="{% url 'teacher_app:published_paper_list' %}" class="nav-item nav-link">Published Papers</a>
                 <a href="{% url 'teacher_app:paper_list' %}" class="nav-item nav-link">Drafted Papers</a>
                 <a href="{% url 'teacher_app:paper_form' %}" class="nav-item nav-link">Create Paper</a>
-                <a href="#" class="nav-item nav-link disabled" tabindex="-1">Results</a>
             </div>
             <div class="navbar-nav ml-auto">
                 <a href="{% url 'home' %}" class="nav-item nav-link">About</a>
-                <a href="{% url 'teacher_app:teacher_logout' %}" class="nav-item nav-link">Logout</a>
+                {% if user.is_authenticated and user.is_teacher%}
+                    <a href="{% url 'teacher_app:teacher_logout' %}" class="nav-item nav-link">Logout</a>
+                {% else %}
+                    <a href="{% url 'teacher_app:teacher_signup' %}" class="nav-item nav-link">Register</a>
+                    <a href="{% url 'teacher_app:teacher_login' %}" class="nav-item nav-link">Login</a>
+                {% endif %}
             </div>
         </div>
     </nav>

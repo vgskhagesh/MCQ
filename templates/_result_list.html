@@ -1,0 +1,106 @@
+
+<div class="container py-3">
+{% if student %}
+    {% if student_user %}
+        <h2>@<a href="{% url 'student_app:user_detail_student' pk=student_user.id %}">{{student_user.username}}</a></h2>
+    {% else %}
+        <h3>Standings for Paper: <a class="text-dark" href="{% url 'test_app:test_home' pk=student_paper.id %}">{{student_paper.name}}(Take test)</a></h3>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-12 mx-auto bg-white rounded shadow">
+
+            <!-- Fixed header table-->
+            <div class="table-responsive">
+                <table class="table table-fixed">
+                
+                    <thead>
+                        {% if student_user %}
+                        <tr>
+                            <th scope="col" class="col-3">Teacher</th>
+                            <th scope="col" class="col-5">Paper</th>
+                            <th scope="col" class="col-2">Date</th>
+                            <th scope="col" class="col-2">Score</th>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <th scope="col" class="col-4">Student</th>
+                            <th scope="col" class="col-4">Date</th>
+                            <th scope="col" class="col-4">Score</th>
+                        </tr>
+                        {% endif %}
+                    </thead>
+                    <tbody>
+                        {% for paper in paper_list %}
+                        {% if student_user %}
+                        <tr>                            
+                            <td class="col-3">@<a href="{% url 'student_app:user_detail_student' pk=paper.paper.user.id %}">{{paper.paper.user.username}}</a></td>
+                            <td class="col-5"><a href="#">{{paper.paper.name|truncatechars:20}}</a></td>
+                            <td class="col-2">{{paper.date|date:"M d, Y"}}</td>
+                            <td class="col-2">{{paper.result}}%</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td class="col-4">@<a href="{% url 'student_app:user_detail_student' pk=paper.student.id %}">{{paper.student.username}}</a></td>
+                            <td class="col-4">{{paper.date|date:"M d, Y"}}</td>
+                            <td class="col-4">{{paper.result}}%</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div><!-- End -->
+            
+        </div>
+    </div>
+{% else %}
+
+
+
+
+
+
+<h2>All Standings</h2>
+    <div class="row">
+        <div class="col-sm-12 mx-auto bg-white rounded shadow">
+
+            <!-- Fixed header table-->
+            <div class="table-responsive">
+                <table class="table table-fixed">
+                
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col-2">Student</th>
+                            <th scope="col" class="col-2">Teacher</th>
+                            <th scope="col" class="col-4">Paper</th>
+                            <th scope="col" class="col-2">Date</th>
+                            <th scope="col" class="col-2">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for paper in paper_list %}
+                        <tr>                            
+                            <td class="col-2">@<a href="{% url 'student_app:user_detail_student' pk=paper.student.id %}">{{paper.student.username}}</a></td>
+                            <td class="col-2">@<a href="{% url 'student_app:user_detail_student' pk=paper.paper.user.id %}">{{paper.paper.user.username}}</a></td>
+                            <td class="col-4"><a href="#">{{paper.paper.name|truncatechars:20}}</a></td>
+                            <td class="col-2">{{paper.date|date:"M d, Y"}}</td>
+                            <td class="col-2">{{paper.result}}%</td>
+                            
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div><!-- End -->
+            
+        </div>
+    </div>
+{% endif %}
+</div>
+
+
+
+
+
+<!--<th scope="row" class="col-2">@<a href="#">{{paper.student.username}}</a></th>-->

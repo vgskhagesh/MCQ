@@ -1,9 +1,57 @@
 {% extends 'student_base.html' %}
 
 {% block base_block %}
-{% if user.is_authenticated and user.is_student %}
-    <h1>Welcome : {{user.username}}</h1>
-{% else %}
-    <h1>Login to start test</h1>
-{% endif %}
+
+<div class="profile">
+
+    {% if user.is_authenticated and user.is_student %}
+
+
+
+        <div class="container block">
+            <div class="row" style="margin-top:5em">
+            <div class="col-sm-12"><h2 class="text-center">Your Details</h2></div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-2"><strong>Name</strong></div>
+                <div class="col-sm-6"><p>: <a href="{% url 'student_app:user_detail_student' pk=user.id %}">{{user.username}}</a></p></div>
+            </div>
+            <div class="row mt-2 inline">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-2"><strong>First Name</strong></div>
+                <div class="col-sm-6"><p>: {{user.first_name}}</p></div>
+            </div>
+            <div class="row mt-2 inline">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-2"><strong>Last Name</strong></div>
+                <div class="col-sm-6"><p>: {{user.last_name}}</p></div>
+            </div>
+            <div class="row mt-2 inline">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-2"><strong>Email</strong></div>
+                <div class="col-sm-6"><p>: {{user.email}}</p></div>
+            </div>
+            <div class="row mt-2 inline">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-2"><strong>No. of tests given</strong></div>
+                <div class="col-sm-6"><p>: <a href="{% url 'student_app:result_list_student' user_id=user.id %}">{{paper_count}}</a></p></div>
+            </div>
+        </div>
+
+
+
+
+
+
+    {% else %}
+        <div class="block"><h1>Login to start test</h1></div>
+    {% endif %}
+    
+    
+</div>
+
+
+
+
 {% endblock base_block %}

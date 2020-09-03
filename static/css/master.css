@@ -1,0 +1,48 @@
+html, body{
+    height: 100%;
+}
+
+.teacherbody { 
+    margin: 0 auto; 
+    background-position:center; 
+    background-size: contain; 
+    overflow: hidden;
+    background-color: #EDECF4;
+    height: 100%;
+} 
+
+.studentbody { 
+    margin: 0 auto; 
+    background-position:center; 
+    background-size: contain; 
+    overflow: hidden;
+    background-color: #F4ECF2;
+    height: 100%;
+} 
+
+.profile{
+    height: 100%;
+    align-items: center;
+    /*border: 3px solid green;*/
+    position: relative;
+    min-height: 100vw;
+}
+
+.block{
+    margin: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

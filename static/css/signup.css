@@ -165,18 +165,19 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
   input.firstname{
     float: left;
+    margin: 2em 0.5em 2em 0;
   }
 
   input.lastname{
+    margin: 2em 0 2em 0.5em;
     float: right;
   }
 
   .extra input{
-    margin: 2em 0;
     font-size: 0.9em;
     color: #fff;
     font-weight: 100;
-    width: 36%;
+    width: 41%;
     display: block;
     border: none;
     padding: 0.8em;
