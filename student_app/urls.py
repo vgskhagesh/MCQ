@@ -15,5 +15,5 @@ urlpatterns = [
     path('results/<int:user_id>/',ListResult.as_view(),name="result_list_student"),
     path('results/paper/<int:paper_id>/',ListResult.as_view(),name="result_list_student_paper"),
 
-    path('user/<int:pk>/',DetailUSer.as_view(),name="user_detail_student")
+    path('user_detail/<int:pk>/',DetailUSer.as_view(),name="user_detail_student")
 ]

@@ -1,17 +1,33 @@
 
 <div class="container">
-    {% if user_detail.is_student %}
-        Student Details <br>
-        {{user_detail.username}} <br>
-        {{user_detail.first_name}} <br>
-        {{user_detail.last_name}} <br>
-        {{user_detail.email}}
+    
 
-    {% else %}
-        Teacher Details <br>
-        {{user_detail.username}} <br>
-        {{user_detail.first_name}} <br>
-        {{user_detail.last_name}} <br>
-        {{user_detail.email}}
-    {% endif %}
+    <div class="row" style="margin-top:5em">
+        {% if student_user_detail %}
+            <div class="col-sm-12"><h2 class="text-center">Student Details</h2></div>
+        {% else %}
+            <div class="col-sm-12"><h2 class="text-center">Teacher Details</h2></div>
+        {% endif %}
+    </div>
+    <div class="row mt-5">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2"><strong>Name</strong></div>
+        <div class="col-sm-6"><p>: <a href="{% url 'student_app:user_detail_student' pk=user.id %}">{{user.username}}</a></p></div>
+    </div>
+    <div class="row mt-2 inline">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2"><strong>First Name</strong></div>
+        <div class="col-sm-6"><p>: {{user.first_name}}</p></div>
+    </div>
+    <div class="row mt-2 inline">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2"><strong>Last Name</strong></div>
+        <div class="col-sm-6"><p>: {{user.last_name}}</p></div>
+    </div>
+    <div class="row mt-2 inline">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-2"><strong>Email</strong></div>
+        <div class="col-sm-6"><p>: {{user.email}}</p></div>
+    </div>
+
 </div>

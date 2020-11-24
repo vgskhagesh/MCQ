@@ -35,7 +35,7 @@
                         {% if student_user %}
                         <tr>                            
                             <td class="col-3">@<a href="{% url 'student_app:user_detail_student' pk=paper.paper.user.id %}">{{paper.paper.user.username}}</a></td>
-                            <td class="col-5"><a href="#">{{paper.paper.name|truncatechars:20}}</a></td>
+                            <td class="col-5"><a href="{% url 'student_app:result_list_student_paper' paper_id=paper.paper.id %}">{{paper.paper.name|truncatechars:20}}</a></td>
                             <td class="col-2">{{paper.date|date:"M d, Y"}}</td>
                             <td class="col-2">{{paper.result}}%</td>
                         </tr>

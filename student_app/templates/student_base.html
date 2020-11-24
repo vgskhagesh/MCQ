@@ -17,17 +17,6 @@
     
     
     <title>Student</title>
-
-
-    <style>
-        body {
-            background: #74ebd5;
-            background: -webkit-linear-gradient(to right, #74ebd5, #ACB6E5);
-            background: linear-gradient(to right, #74ebd5, #ACB6E5);
-            min-height: 100vh;
-
-        }
-    </style>
 </head>
 <body class="studentbody">
 
@@ -53,7 +42,8 @@
             </div>
             <div class="navbar-nav ml-auto">
                 <a href="{% url 'home' %}" class="nav-item nav-link">About</a>
-                {% if user.is_authenticated and user.is_student%}
+                {% if auth %}
+                {% elif user.is_authenticated and user.is_student %}
                     <a href="{% url 'student_app:student_logout' %}" class="nav-item nav-link">Logout</a>
                 {% else %}
                     <a href="{% url 'student_app:student_signup' %}" class="nav-item nav-link">Register</a>
@@ -63,9 +53,11 @@
         </div>
     </nav>
 
-    <div class="container body">
-    {% block base_block %}
-    {% endblock base_block %}
+    <div class="studentblock">
+        <div class="container">
+        {% block base_block %}
+        {% endblock base_block %}
+        </div>
     </div>
 
 </body>

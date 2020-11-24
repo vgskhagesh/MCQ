@@ -1,30 +1,125 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-image: url(&quot;{% static 'images/image3.jpg' %} &quot;);">
-    <a class="navbar-brand" href="#">About MCQ</a>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-        <a class="nav-link" href="{% url 'teacher_app:teacher_home' %}">Teacher</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="{% url 'student_app:student_home' %}">Student</a>
-        </li>
-    </ul>
-    </nav>
+<html>
+<title>MCQ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+</style>
+<body class="w3-light-grey">
 
-    <div class="container">
-        About description goes here
+<!-- Page Container -->
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+  <!-- The Grid -->
+  <div class="w3-row-padding">
+  
+    <!-- Left Column -->
+    <div class="w3-third">
+    
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-display-container">
+          <img src="{% static 'images/khagesh.jpg' %}" style="width:100%" alt="Avatar">
+          <div class="w3-display-bottomleft w3-container w3-text-white">
+            <h2>Khagesh Kumar</h2>
+          </div>
+        </div>
+        <div class="w3-container">
+          <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-teal"></i>Imagnier</p>
+          <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal"></i>IIT Guwahati</p>
+          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>vgskhagesh@gmail.com</p>
+          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal"></i>9963696940</p>
+          <hr>
+
+          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
+          <p>C++</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:80%">
+              <div class="w3-center w3-text-white">80%</div>
+            </div>
+          </div>
+          <p>Python</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:70%">70%</div>
+          </div>
+          <p>Java</p>
+          <div class="w3-light-grey w3-round-xlarge w3-small">
+            <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:40%">40%</div>
+          </div>
+          <br>
+
+        </div>
+      </div><br>
+
+    <!-- End Left Column -->
     </div>
+
+    <!-- Right Column -->
+    <div class="w3-twothird">
+    
+      <div class="w3-container w3-card w3-white w3-margin-bottom">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-home fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>MCQ Web Application</h2>
+        <div class="w3-container">
+          <h5 class="w3-opacity"><b>About</b></h5>
+          <p>Django based Web App and a model online test platform with multi-user login. Used MySql-relational database which consist of several relational tables.</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <a href="{% url 'teacher_app:teacher_home' %}"><h5 class="w3-opacity"><b>Teacher Portal</b></h5></a>
+          <h6 class="w3-text-teal">Username: teacher, Password: 1234</h6>
+          <p>Teacher can manage papers and question. Once finished, teacher can publish the paper for students to give test.</p>
+          <hr>
+        </div>
+        <div class="w3-container">
+          <a href="{% url 'student_app:student_home' %}"><h5 class="w3-opacity"><b>Student Portal + Test Session</b></h5></a>
+          <h6 class="w3-text-teal">Username: student, Password: 1234</h6>
+          <p>Student can login/signup to give the test. A student can give any number of tests for a particular paper and can also view all standings for each paper published by teacher. </p><br>
+        </div>
+      </div>
+
+      <div class="w3-container w3-card w3-white">
+        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-certificate fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>About Me</h2>
+        <div class="w3-container">
+            <p>Enthusiast</p>
+            <hr>
+        </div>
+        <div class="w3-container">
+            <h5 class="w3-opacity"><b>Major in Electronics and Communication Engineering</b></h5>
+            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2017 - present</h6>
+            <hr>
+        </div>
+        <div class="w3-container">
+            <h5 class="w3-opacity"><b>Minor in Computer Science Engineering</b></h5>
+            <h6 class="w3-text-teal"><i class="fa fa-calendar fa-fw w3-margin-right"></i>2018 - present</h6>
+            <hr>
+        </div>
+      </div>
+
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+  <!-- End Page Container -->
+</div>
+
+<footer class="w3-container w3-teal w3-center w3-margin-top">
+    <!--
+    <p>Find me on social media.</p>
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    -->
+    <p><a href="https://github.com/vgskhagesh" target="_blank">GitHub</a></p>
+</footer>
 
 </body>
 </html>

@@ -13,6 +13,11 @@
         <div class="col-sm-8">
             <h3>Paper: {{question_paper.name}}</h3>
             <small>Question count:{{question_list.count}}</small>
+            {% if not question_list.count and not question_paper.is_published %}
+                <a href="#" style="text-decoration:none"><small class="text-success">Add questions to publish</small></a>
+            {% elif not question_paper.is_published %}
+                <a href="{% url 'teacher_app:published_paper_list_approve' id=question_paper.id %}" style="text-decoration:none"><small class="text-success">Publish Paper</small></a>
+            {% endif %}
         </div>
         <div class="col-sm-4">
             {% if not question_paper.is_published %}

@@ -108,6 +108,7 @@ class TestGenerateResult(TemplateView):
                 if  Question.objects.get(id=_.question_id).key==_.answer:
                     result+=1
             context["percentage"] = result/count*100
+            context["end"] = True
             self.paper_clone.is_submitted = True
             self.paper_clone.result = result/count*100
             self.paper_clone.save()

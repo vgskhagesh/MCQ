@@ -2,8 +2,8 @@
 
 {% block base_block %}
 {% if user.is_authenticated and user.is_teacher %}
-    <h1>Welcome : {{user.username}} <br> You cannot view this page without logging in</h1>
+    <h1 style="margin-top:20px;" class="text-center">Welcome : {{user.username}} <br> </h1>
 {% else %}
-    <h1>Login to start test</h1>
+    <h1 style="margin-top:20px;" class="text-center">Login to start test</h1>
 {% endif %}
 {% endblock base_block %}

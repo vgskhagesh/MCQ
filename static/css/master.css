@@ -1,38 +1,59 @@
 html, body{
     height: 100%;
+    scroll-behavior: smooth;
 }
 
 .teacherbody { 
     margin: 0 auto; 
     background-position:center; 
     background-size: contain; 
-    overflow: hidden;
+    /*overflow: hidden;*/
     background-color: #EDECF4;
+    display: flex;
+    flex-flow: column;
     height: 100%;
 } 
+
+.teacherblock{
+    /*height: 100%;*/
+    overflow-x: hidden;
+}
 
 .studentbody { 
     margin: 0 auto; 
     background-position:center; 
     background-size: contain; 
-    overflow: hidden;
     background-color: #F4ECF2;
+    display: flex;
+    flex-flow: column;
     height: 100%;
 } 
+
+.studentblock{
+    overflow-x: hidden;
+    /*height: 100%;*/
+}
 
 .profile{
     height: 100%;
     align-items: center;
     /*border: 3px solid green;*/
     position: relative;
-    min-height: 100vw;
+    /*min-height: 100vw;*/
 }
 
 .block{
     margin: none;
 }
 
-
+/*
+body {
+    background: #74ebd5;
+    background: -webkit-linear-gradient(to right, #74ebd5, #ACB6E5);
+    background: linear-gradient(to right, #74ebd5, #ACB6E5);
+    min-height: 100vh;
+}
+*/
 
 
 

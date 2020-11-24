@@ -1,3 +1,4 @@
+from django.http import request
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView
 from django.shortcuts import redirect
@@ -67,7 +68,9 @@ class DetailUSer(DetailView):
         self.user_detail = User.objects.get(id=self.kwargs.get("pk"))
         context = super().get_context_data(**kwargs)
         context["user_detail"] = self.user_detail
-        context["student"] = True
+        context["student_user_detail"] = True
+        if self.request.user.is_authenticated:
+            context["auth"] = True
         return context
     
     
