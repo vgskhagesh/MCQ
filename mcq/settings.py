@@ -81,6 +81,21 @@ WSGI_APPLICATION = 'mcq.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'OfZ5G0ulBt',
+        'USER': 'OfZ5G0ulBt',
+        'PASSWORD':'sgOSOlQVPV',
+        'HOST': 'remotemysql.com',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+    }
+}
+
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mcq',
         'USER': 'root',
         'PASSWORD':'',
@@ -92,7 +107,6 @@ DATABASES = {
     }
 }
 
-'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
